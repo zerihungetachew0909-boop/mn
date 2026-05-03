@@ -11,7 +11,17 @@ from telegram.ext import (
     filters,
 )
 
+import os
+from telegram.ext import ApplicationBuilder
+
 TOKEN = os.getenv("BOT_TOKEN")
+
+if not TOKEN:
+    raise ValueError("BOT_TOKEN is missing!")
+
+app = ApplicationBuilder().token(TOKEN).build()
+app.run_polling()
+
 
 logging.basicConfig(level=logging.INFO)
 
